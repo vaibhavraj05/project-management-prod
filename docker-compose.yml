@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  node:
+    image: vaibhavrajnathchauhan/project-management:2
+    depends_on:
+      - redis
+    ports:
+      - 3010:3010
+    env_file: .env
+
+  redis:
+    image: redis
+    ports:
+      - 6379:6379

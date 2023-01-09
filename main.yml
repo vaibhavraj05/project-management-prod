@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    
+  tasks:
+  - name: Updating the current compose file
+    replace:
+      path: /home/ec2-user/arvind/docker-compose.yml
+      regexp: 'vaibhavrajnathchauhan\/project-management:*(.+)$'
+      replace: "vaibhavrajnathchauhan/project-management:{{ BUILD_ID }}"
+
+  # docker compose up
+  - name: Running the container
+    docker_compose:
+      project_src: /home/ec2-user/arvind
+      build: false
+      restarted: true
